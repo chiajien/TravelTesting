@@ -18,8 +18,6 @@ namespace WebTesting.Controllers
 
         public ActionResult Index()
         {
-            //SqlConnection con = new SqlConnection(Settings.Da);
-            
             return View();
         }
 

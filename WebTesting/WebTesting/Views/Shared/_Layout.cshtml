@@ -1,44 +1,239 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GoTravel</title>
+        @*@Styles.Render("~/Content/css")
+         @Scripts.Render("~/bundles/modernizr")*@
+        
+    </head>
 
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <body>
+       <div class="bg">
+            <div id="header">
+                @*<h1>Welcome to GoTravel</h1>*@
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+
+            <div id="nav-bar">
+                <ul>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a>Country</a></li>
+                    <li style="float:right">@Html.ActionLink("Sign Up", "Register", "Account")</li>
+                    <li style="float:right">@Html.ActionLink("Sign In", "Login", "Account")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
+          
+            <div id="body-contain">
+                @RenderBody()
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - CJ Application</p>
+                </footer>
+            </div>
+            @*@Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)*@
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<style>
+    body, html {
+    height: 100%;
+    margin:0;
+}
+    footer{
+    color:white;
+    position:fixed; 
+    bottom: 0;
+    left: 1500px;
+    right: 0;
+    height: 50px;
+    }
+
+   .bg {
+    /* The image used */
+    background-image: url("../../Image/Background2.jpg");
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-repeat: no-repeat;
+      background-position: center top; 
+    background-size: cover;
+}
+
+  #header{
+     text-align:center;
+     color:white;
+  }
+  #header h1{
+     margin:0;
+     padding-top:20px;
+     padding-bottom:10px;
+  }
+
+  #nav-bar{
+  position: -webkit-sticky;
+  position: sticky;
+  margin:0;
+
+  }
+   #nav-bar ul{
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.5);
+    margin:0;
+}
+
+ #nav-bar li {
+    float: left; /*For nav item float to left to right*/
+}
+
+  #nav-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+   #nav-bar li a:hover {
+    background-color: #111;
+}
+
+ #nav-bar .active {
+    background-color:  #111;
+}
+</style>
+
+<style>
+    .LoginForm,.RegisterForm {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -40px;
+        bottom: -40px;
+        width: auto;
+        height: auto;
+        /*background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);*/
+        background-size: cover;
+        -webkit-filter: blur(5px);
+        z-index: 0;
+    }
+
+    .grad {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -40px;
+        bottom: -40px;
+        width: auto;
+        height: auto;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+        z-index: 1;
+        opacity: 0.7;
+    }
+
+    .LoginHeader,.RegisterHeader {
+        position: absolute;
+        top: calc(50% - 35px);
+        left: calc(50% - 255px);
+        z-index: 2;
+    }
+
+    .LoginHeader div,.RegisterHeader div {
+            float: right;
+            color: #fff;
+            font-family: 'Exo', sans-serif;
+            font-size: 35px;
+            font-weight: 200;
+        }
+
+            .LoginHeader div span ,.RegisterHeader div span {
+                color: #5379fa !important;
+            }
+
+    .login,.Register {
+        position: absolute;
+        top: calc(50% - 75px);
+        left: calc(50% - 100px);
+        height: 150px;
+        width: 350px;
+        padding: 10px;
+        z-index: 2;
+    }
+
+        .login input[type=text],.Register input[type=text] {
+            width: 250px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 2px;
+            color: #fff;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 4px;
+        }
+
+        .login input[type=password] ,.Register input[type=password] {
+            width: 250px;
+            height: 30px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 2px;
+            color: #fff;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 4px;
+            margin-top: 10px;
+        }
+
+        .login  input[type=button],.Register input[type=button] {
+            width: 260px;
+            height: 35px;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 2px;
+            color: white;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+            .login input[type=button]:hover,.Register input[type=button]:hover {
+                opacity: 0.8;
+            }
+
+            .login input[type=button]:active,.Register input[type=button]:active {
+                opacity: 0.6;
+            }
+
+        .login input[type=text]:focus,.Register input[type=text]:focus {
+            outline: none;
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+
+        .login input[type=password]:focus,.Register input[type=password]:focus {
+            outline: none;
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+
+        .login input[type=button]:focus,.Register input[type=button]:focus {
+            outline: none;
+        }
+
+    ::-webkit-input-placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+
+    ::-moz-input-placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+</style>
+
+<script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
